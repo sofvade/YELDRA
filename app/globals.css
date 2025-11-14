@@ -1,11 +1,36 @@
-
+/* stylelint-disable at-rule-no-unknown */
+/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
-:root { --bg: 255 255 255; --fg: 18 20 24; }
-html, body, #__next { height: 100%; }
-body { color: rgb(var(--fg)); background: rgb(var(--bg)); }
-.container-max { @apply max-w-7xl mx-auto px-4; }
-.card { @apply rounded-2xl bg-white shadow-soft border border-gray-100; }
-.badge { @apply inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium; }
+/* -------- Base (tokens + resets finos) -------- */
+@layer base {
+  :root{
+    --bg: 255 255 255;
+    --fg: 18 20 24;
+    --card: 255 255 255;
+  }
+
+  * { border: 1px solid rgba(0,0,0,0.06); }
+  html, body, #__next, .next-root { height: 100%; }
+  body { @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))] antialiased; }
+}
+
+/* -------- Components reutilizables -------- */
+@layer components {
+  .container-max { @apply max-w-7xl mx-auto px-4; }
+
+  .card { @apply rounded-2xl bg-[rgb(var(--card))] shadow-soft border; }
+
+  .badge { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border; }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium border bg-white hover:bg-gray-50 active:bg-gray-100; }
+  .btn-primary { @apply text-white bg-black border-black hover:bg-black/90; }
+}
+
+/* -------- Utilities pequeñas -------- */
+@layer utilities {
+  .shadow-soft { box-shadow: 0 2px 6px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06); }
+}

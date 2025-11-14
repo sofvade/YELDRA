@@ -1,7 +1,10 @@
+import { NextResponse } from "next/server";
 
-import { NextResponse } from 'next/server'
-import { metrics } from '@/lib/store'
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  return NextResponse.json(metrics())
+  const mod = await import('@/lib/store');
+  const listMetrics = (mod as any).listMetrics;
+  const metrics = typeof listMetrics === 'function' ? await listMetrics() : [];
+  return NextResponse.json({ metrics });
 }
